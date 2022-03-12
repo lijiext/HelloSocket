@@ -24,10 +24,10 @@ int main() {
 	// 3. 绑定 scoket 和端口
 	if (bind(_sock, (sockaddr*)&_sin, sizeof(_sin)) == SOCKET_ERROR)
 	{
-		printf("ERROR 绑定失败\n");
+		printf("服务端：端口和 socket 绑定失败\n");
 	}
 	else {
-		printf("绑定成功\n");
+		printf("服务端：socket 绑定成功\n");
 	}
 	listen(_sock,5); // 监听
 
@@ -40,9 +40,9 @@ int main() {
 		_clientSock = accept(_sock, (sockaddr*)&clientAdd, &addLen);
 		if (INVALID_SOCKET == _clientSock)
 		{
-			printf("无效的客户端 scoket\n");
+			printf("服务端：无效的客户端 scoket\n");
 		}
-		printf("新客户端连接t: %s", inet_ntoa(clientAdd.sin_addr));
+		printf("服务端：新客户端连接: %s\n", inet_ntoa(clientAdd.sin_addr));
 		// 5. 向客户端发送信息
 		send(_clientSock, msgBuffer, strlen(msgBuffer) + 1, 0);
 	}
